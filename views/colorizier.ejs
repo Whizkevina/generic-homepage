@@ -63,46 +63,81 @@
             <div class="container">
                 <div class="row">
                         <!-- <h2>Generic Homepage Colorizer</h2> -->
-                    <div class="col-md-12">
+                    <div class="row">
                         <div class="row">
                                 
                             <div class="col-md-6">
                                     <h5 style="text-align: center;">Original</h5>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="preview" class="prev"></div>
+                                        <div id="preview" class="prev">
+                                                <img class="img-responsive" id="targetImg" style="height:250px;width:250px;margin-bottom:10px" src="" />
+                                        </div>
                                     </div>
-                                    <!-- <div class="col-md-6"></div> -->
+                                
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" value="Image Name">
+                                            <div class="form-group">
+
+                                                   
+                            
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <input type="text" class="form-control" value="Image Name">
+                                                    </div>
+                                                <div class="col-md-5">
+                                                        
+                                                    <input type="file" id="imgFile" name="ProfileImageFile" accept="image/*" value="Choose Image" class="btn btn-info"
+                                                           style="width:183px; background-color: #ff6a00;" required/>
+                                                                           
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input id="file-input" class="btn file" type="file" multiple>
-                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <input id="file-input" class="btn file" type="file">
+                                        
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                     <h5 style="text-align: center;">Style</h5>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="preview2" class="prev"></div>
+                                        <div id="preview2" class="prev"> <img class="img-responsive" id="targetImg2" style="height:250px;width:250px;margin-bottom:10px" src="" /></div>
                                     </div>
-                                    <!-- <div class="col-md-6"></div> -->
+                                    
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" value="Image Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input id="file-input2" class="btn file" type="file" multiple>
-                                    </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+    
+                                                       
+                                
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control" value="Image Name">
+                                                        </div>
+                                                    <div class="col-md-5">
+                                                            
+                                                        <input type="file" id="imgFilep" name="ProfileImageFile" accept="image/*" value="Choose Image" class="btn btn-info"
+                                                               style="width:183px;" required/>
+                                                                           
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 pt-3" >
+                            <div class="col-md-0"></div>
+                            <div class="col-md-12" >
                                 <button class="btn btn-success btn-lg d-block mx-auto " style="width: 250px;" value="GO" id="go">Go</button>
                             </div>
                         </div>
@@ -129,5 +164,78 @@
     </script>
     <script type="text/javascript" src="/js/indexScript.js"></script>
 </body>
+
+
+
+<script>
+        var imgFile = document.getElementById("imgFile");
+    
+    
+        $(document).ready(function () {
+            $("#imgFile").change(function () {
+                var File = this.files;
+                if (File && File[0]) {
+                    ReadImage(File[0]);
+                }
+            })
+        })
+    
+    
+        var ReadImage = function (file) {
+            var reader = new FileReader;
+            var image = new Image;
+    
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+                image.src = _file.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = ~~(file.size / 1024) + "KB";
+                    $("#targetImg").attr('src', _file.target.result);
+                    $("#imgPreview").show();
+                }
+            }
+        }
+    
+
+
+    //second method method-2
+
+
+        var imgFilep = document.getElementById("imgFilep");
+    
+        $(document).ready(function () {
+            $("#imgFilep").change(function () {
+
+                console.log("aba");
+                var File = this.files;
+                if (File && File[0]) {
+                    ReadImage2(File[0]);
+                }
+            })
+        })
+   
+    
+        var ReadImage2 = function (file) {
+            var reader = new FileReader;
+            var image = new Image;
+            reader.readAsDataURL(file);
+            reader.onload = function (_file) {
+                image.src = _file.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    var type = file.type;
+                    var size = ~~(file.size / 1024) + "KB";
+                    $("#targetImg2").attr('src', _file.target.result);
+                    $("#imgPreview").show();
+                }
+            }
+        }
+    
+    
+    </script>
 
 </html>
